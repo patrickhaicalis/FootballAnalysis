@@ -22,11 +22,11 @@ def Heatmapgoals(name):
     df = df.drop(df_goal.index, axis=0)
 
     f, ax = CreatePitch()
-    cmap = LinearSegmentedColormap.from_list("", ["blue","green","yellow","red"])
+    cmap = LinearSegmentedColormap.from_list("", ['black', "blue","green","yellow","red"])
     sns.kdeplot(1-df.Y, df.X, cmap=cmap, n_levels=50, shade=True, shade_lowest=False)
     plt.savefig(f'Images/GoalHeatmap/{name}GoalHeatmap.png')
 
-    m =  cv2.imread(f"Images/GoalHeatmap/{name}GoalHeatmap.png")
+    m =  plt.imread(f"Images/GoalHeatmap/{name}GoalHeatmap.png")
 
     h,w,bpp = np.shape(m)
 
@@ -42,5 +42,6 @@ def Heatmapgoals(name):
                 m[py][px][1] = 0
                 m[py][px][2] = 0
 
-    #cv2.imshow('matrix', m)
-    cv2.imwrite(f'Images/GoalHeatmap/{name}GoalHeatmap.png',m)
+    plt.title(f'{name} Goal Heatmap 2019/20 Season')
+    plt.savefig(f'Images/GoalHeatmap/{name}GoalHeatmap.png')
+    plt.show()
